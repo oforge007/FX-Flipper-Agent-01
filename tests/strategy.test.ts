@@ -1,0 +1,5 @@
+import test from "node:test";import assert from "node:assert/strict";import{evaluateRoundTrip}from"../src/strategy/economics.js";import{mayStartBuy,transitionCycle}from"../src/strategy/cycle-guard.js";
+test("minimum exit includes costs and target profit",()=>{const r=evaluateRoundTrip({entryAmountUsdt:100,estimatedTotalCostsUsdt:2.4,minimumNetProfitUsdt:1.6,maximumTradeUsdt:150});assert.equal(r.minimumExitProceedsUsdt,104);assert.equal(r.accepted,true)});
+test("rejects above maximum",()=>{const r=evaluateRoundTrip({entryAmountUsdt:151,estimatedTotalCostsUsdt:1,minimumNetProfitUsdt:1,maximumTradeUsdt:150});assert.equal(r.accepted,false)});
+test("blocks second buy while cycle open or halted",()=>{assert.equal(mayStartBuy("open",false),false);assert.equal(mayStartBuy("sell_pending",false),false);assert.equal(mayStartBuy("closed",false),true);assert.equal(mayStartBuy("idle",true),false)});
+test("validates cycle transitions",()=>{assert.throws(()=>transitionCycle("open","buy_pending"));assert.equal(transitionCycle("open","sell_pending"),"sell_pending")});

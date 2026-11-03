@@ -1,0 +1,4 @@
+export type CycleState="idle"|"buy_pending"|"open"|"sell_pending"|"closed"|"halted";
+const allowed:Record<CycleState,CycleState[]>={idle:["buy_pending","halted"],buy_pending:["open","idle","halted"],open:["sell_pending","halted"],sell_pending:["closed","open","halted"],closed:["buy_pending","halted"],halted:["idle"]};
+export function transitionCycle(current:CycleState,next:CycleState):CycleState{if(!allowed[current].includes(next))throw new Error(`Invalid cycle transition: ${current} -> ${next}`);return next}
+export function mayStartBuy(state:CycleState,emergencyStop:boolean):boolean{return !emergencyStop&&(state==="idle"||state==="closed")}

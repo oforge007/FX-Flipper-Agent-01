@@ -1,0 +1,1 @@
+export default function handler(_request, response) { response.status(200).json({status:"ok",service:"fx-flipper-agent",mode:"shadow",liveTradingEnabled:false,timestamp:new Date().toISOString()}); }
