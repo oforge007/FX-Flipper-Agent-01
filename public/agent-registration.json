@@ -1,0 +1,14 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "name": "FX-Flipper Agent",
+  "description": "A shadow-first autonomous FX strategy agent for the cNGN/USDT and cNGN/USDC corridors on Celo. It evaluates paired buy and sell cycles, isolates market allocations, protects execution-cost reserves, and requires positive round-trip economics after fees and slippage. Live execution is disabled until official Textile FX integration, transaction reconciliation, and wallet safety controls are verified.",
+  "services": [
+    {
+      "name": "web",
+      "endpoint": "https://fxflipper.vercel.app/"
+    }
+  ],
+  "x402Support": false,
+  "active": true,
+  "registrations": []
+}
